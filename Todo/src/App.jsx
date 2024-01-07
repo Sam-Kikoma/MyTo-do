@@ -1,42 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 const baseUrl = "http://localhost:3001/api/todos";
+import Form from "/components/Form.jsx";
+import Todo from "/components/Todo.jsx";
 import "./App.css";
 
-const Todo = ({ todos, onChange, deleteTodo }) => {
-	return (
-		<>
-			<ul>
-				{todos.map((todo) => (
-					<li key={todo.id}>
-						{todo.completed ? (
-							<span style={{ textDecoration: "line-through" }}>{todo.task}</span>
-						) : (
-							<span>{todo.task}</span>
-						)}
-						<input
-							type="checkbox"
-							name="completed"
-							id={`completed-${todo.id}`}
-							checked={todo.completed}
-							onChange={() => onChange(todo.id)}
-						/>
-						<button onClick={() => deleteTodo(todo.id)}>Delete</button>
-					</li>
-				))}
-			</ul>
-		</>
-	);
-};
-
-const Form = ({ onSubmit, newTodo, onChange }) => {
-	return (
-		<form onSubmit={onSubmit}>
-			<input type="text" placeholder="Enter todo" value={newTodo} onChange={onChange} />
-			<button type="submit">+</button>
-		</form>
-	);
-};
 const App = () => {
 	const [todos, setTodos] = useState([]);
 	const [newTodo, setNewTodo] = useState();
