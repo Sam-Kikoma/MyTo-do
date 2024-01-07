@@ -21,7 +21,7 @@ app.get("/api/todos/:id", (req, res) => {
 // Add a todo
 app.post("/api/todos", (req, res) => {
 	const body = req.body;
-	const creationDate = new Date(body.creationDate);
+	// Work on the date thing
 	const todo = new Todo({
 		task: body.task,
 		creationDate: body.creationDate,
@@ -38,6 +38,24 @@ app.delete("/api/todos/:id", (req, res) => {
 			res.status(404).json({ error: "Todo not found" });
 		}
 	});
+});
+// Update completed status
+app.put("/api/todos/:id", (req, res) => {
+	const id = req.params.id;
+	const updatedTodo = { completed: req.body.completed };
+
+	Todo.findByIdAndUpdate(id, updatedTodo, { new: true })
+		.then((updatedTodo) => {
+			if (updatedTodo) {
+				res.json(updatedTodo);
+			} else {
+				res.status(404).json({ error: "Todo not found" });
+			}
+		})
+		.catch((error) => {
+			console.error("Error updating todo item:", error);
+			res.status(500).json({ error: "Internal Server Error" });
+		});
 });
 
 // Port
