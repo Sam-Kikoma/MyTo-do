@@ -75,12 +75,11 @@ const App = () => {
 	useEffect(hook, []);
 
 	return (
-		<>
+		<div className="w-screen flex flex-col justify-center items-center">
 			<h1>Todo App</h1>
 			<Form newTodo={newTodo} onSubmit={addTodo} onChange={handleChange} />
-			<h2>Todos</h2>
 			<Todo todos={todos} onChange={handleChecked} deleteTodo={deleteTodo} />
-		</>
+		</div>
 	);
 };
 
