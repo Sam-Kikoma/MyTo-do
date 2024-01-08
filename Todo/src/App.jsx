@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001/api/todos";
 import Form from "/components/Form.jsx";
 import Todo from "/components/Todo.jsx";
-import "./App.css";
+import "./index.css";
 
 const App = () => {
 	const [todos, setTodos] = useState([]);
